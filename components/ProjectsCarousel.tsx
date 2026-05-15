@@ -238,7 +238,7 @@ export default function ProjectsCarousel() {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [reduceMotion]);
+  }, [reduceMotion, rotation]);
 
   const nOuter = OUTER_RING.length;
   const nInner = projects.length;

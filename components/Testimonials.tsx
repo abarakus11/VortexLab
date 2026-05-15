@@ -79,7 +79,11 @@ export default function Testimonials() {
         >
           <QuoteGlyph className="pointer-events-none absolute right-5 top-4 h-14 w-[4.5rem] opacity-90" />
           <div className="mb-4 text-amber-400 text-sm">{"★".repeat(testimonials[0].stars)}</div>
-          <p className="relative z-[1] text-[0.9rem] leading-relaxed text-white/65">"{testimonials[0].text}"</p>
+          <p className="relative z-[1] text-[0.9rem] leading-relaxed text-white/65">
+            {"\u201C"}
+            {testimonials[0].text}
+            {"\u201D"}
+          </p>
           <div className="mt-6 flex items-center gap-3">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-[#1e90ff] text-xs font-bold">
               {testimonials[0].initials}
@@ -100,7 +104,11 @@ export default function Testimonials() {
         >
           <QuoteGlyph className="pointer-events-none absolute right-4 top-6 h-16 w-20 opacity-80" />
           <div className="mb-4 text-amber-400 text-sm">{"★".repeat(testimonials[1].stars)}</div>
-          <p className="relative z-[1] text-[0.9rem] leading-relaxed text-white/65">"{testimonials[1].text}"</p>
+          <p className="relative z-[1] text-[0.9rem] leading-relaxed text-white/65">
+            {"\u201C"}
+            {testimonials[1].text}
+            {"\u201D"}
+          </p>
           <div className="mt-6 flex items-center gap-3">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-[#1e90ff] text-xs font-bold">
               {testimonials[1].initials}
@@ -121,7 +129,11 @@ export default function Testimonials() {
         >
           <QuoteGlyph className="pointer-events-none absolute right-5 top-5 h-14 w-[4.5rem] opacity-75" />
           <div className="mb-4 text-amber-400 text-sm">{"★".repeat(testimonials[2].stars)}</div>
-          <p className="relative z-[1] text-[0.9rem] leading-relaxed text-white/65">"{testimonials[2].text}"</p>
+          <p className="relative z-[1] text-[0.9rem] leading-relaxed text-white/65">
+            {"\u201C"}
+            {testimonials[2].text}
+            {"\u201D"}
+          </p>
           <div className="mt-6 flex items-center gap-3">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-[#1e90ff] text-xs font-bold">
               {testimonials[2].initials}
