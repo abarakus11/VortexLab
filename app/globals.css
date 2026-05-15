@@ -1,0 +1,342 @@
+/* Fontes: next/font no layout (evita @import quebrar o pipeline CSS) */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --font-* definidas em app/layout via next/font */
+  --vortex-deep: #2d1b6b;
+  --vortex-electric: #1e90ff;
+  --vortex-cyan: #22d3ee;
+  --vortex-white: #f8f8ff;
+  --vortex-bg: #020206;
+  /* Neon em volta do texto (camadas cyan → azul → violeta) */
+  --neon-cyan: 34, 211, 238;
+  --neon-blue: 30, 144, 255;
+  --neon-violet: 168, 85, 247;
+  --neon-text: 0 0 4px rgb(var(--neon-cyan) / 0.45), 0 0 10px rgb(var(--neon-blue) / 0.28),
+    0 0 22px rgb(var(--neon-violet) / 0.16), 0 0 42px rgb(var(--neon-violet) / 0.08);
+  --neon-text-strong: 0 0 6px rgb(var(--neon-cyan) / 0.65), 0 0 14px rgb(var(--neon-blue) / 0.45),
+    0 0 28px rgb(var(--neon-violet) / 0.3), 0 0 52px rgb(var(--neon-violet) / 0.14);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #020206;
+  min-height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: radial-gradient(120% 80% at 50% -20%, rgba(45, 27, 107, 0.35), transparent 55%),
+    var(--vortex-bg);
+  color: var(--vortex-white);
+  font-family: var(--font-space-grotesk);
+  overflow-x: hidden;
+  cursor: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  /* Todas as palavras herdam halo neon suave */
+  text-shadow: var(--neon-text);
+}
+
+/* Títulos: halo mais intenso */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-shadow: var(--neon-text-strong);
+}
+
+/* Texto com preenchimento em gradiente: text-shadow não aparece — usar drop-shadow no contêiner */
+.neon-clip-text {
+  filter: drop-shadow(0 0 6px rgb(var(--neon-cyan) / 0.55)) drop-shadow(0 0 14px rgb(var(--neon-blue) / 0.4))
+    drop-shadow(0 0 28px rgb(var(--neon-violet) / 0.28));
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #08080f;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7c3aed, #2563eb);
+  border-radius: 2px;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(124, 58, 237, 0.3);
+  color: #f8f8ff;
+}
+
+/* ── Hero: primeira linha manuscrita (caneta) ── */
+.hero-pen-line {
+  font-family: var(--font-pen);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  color: var(--vortex-white);
+  /* Traço de tinta levemente irregular */
+  text-shadow: var(--neon-text), 0 0.03em 0 rgb(248 248 255 / 0.06);
+}
+
+/* ── Labels tech (mono) ── */
+.label-mono {
+  font-family: var(--font-mono-label);
+  font-feature-settings: "kern" 1, "liga" 1;
+  letter-spacing: 0.22em;
+}
+
+/* ── Nav link underline draw ── */
+.nav-underline {
+  position: relative;
+  color: rgba(248, 248, 255, 0.52);
+  transition: color 0.35s ease;
+}
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.28rem;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--vortex-electric), var(--vortex-cyan));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-underline:hover {
+  color: var(--vortex-white);
+}
+.nav-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Shimmer CTA (gradient move) ── */
+.btn-shimmer {
+  background-position: 0% 50%;
+  transition: background-position 0.6s ease, box-shadow 0.4s ease;
+}
+.btn-shimmer:hover {
+  background-position: 100% 50%;
+}
+
+/* Instagram — cores de marca (gradiente clássico) + shimmer */
+.btn-instagram-brand {
+  background-image: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 18%,
+    #dc2743 38%,
+    #cc2366 58%,
+    #bc1888 78%,
+    #7938b9 100%
+  );
+  background-size: 220% 220%;
+}
+.btn-shimmer-instagram {
+  background-position: 0% 50%;
+  transition: background-position 0.55s ease, box-shadow 0.35s ease;
+}
+.btn-shimmer-instagram:hover {
+  background-position: 100% 50%;
+}
+
+/* WhatsApp — verde de marca + shimmer (usa com bg-size no Tailwind) */
+.btn-whatsapp-brand {
+  background-image: linear-gradient(135deg, #075e54 0%, #128c7e 35%, #25d366 70%, #4be883 100%);
+  background-size: 220% 220%;
+}
+
+/* ── Hero headline phrase pulse ── */
+.hero-phrase-pulse {
+  display: inline-block;
+  background: linear-gradient(
+    110deg,
+    #c4b5fd 0%,
+    #1e90ff 35%,
+    #22d3ee 55%,
+    #a855f7 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 5s linear infinite, phrasePulse 4.5s ease-in-out infinite;
+}
+
+@keyframes phrasePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 10px rgb(var(--neon-cyan) / 0.6)) drop-shadow(0 0 22px rgb(var(--neon-blue) / 0.4))
+      drop-shadow(0 0 40px rgb(var(--neon-violet) / 0.25)) brightness(1);
+  }
+  50% {
+    transform: scale(1.015);
+    filter: drop-shadow(0 0 14px rgb(var(--neon-cyan) / 0.75)) drop-shadow(0 0 30px rgb(var(--neon-blue) / 0.5))
+      drop-shadow(0 0 52px rgb(var(--neon-violet) / 0.35)) brightness(1.06);
+  }
+}
+
+/* ── Gradient text utility ── */
+.gradient-text {
+  background: linear-gradient(135deg, #a855f7 0%, #1e90ff 45%, #22d3ee 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s linear infinite;
+  filter: drop-shadow(0 0 8px rgb(var(--neon-cyan) / 0.5)) drop-shadow(0 0 18px rgb(var(--neon-violet) / 0.35));
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+
+/* ── Reveal animation ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Grid overlay ── */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Noise texture ── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+}
+
+/* ── Glow button ── */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, #a855f7, #3b82f6, #06b6d4);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-glow:hover::after {
+  opacity: 1;
+}
+
+/* ── Glassmorphism card ── */
+.glass-card {
+  background: rgba(13, 13, 26, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+}
+
+/* ── Float animations ── */
+@keyframes float1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-8px) rotate(-1deg); }
+}
+@keyframes float3 {
+  0%, 100% { transform: translateY(0) rotate(1deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+.float-1 { animation: float1 6s ease-in-out infinite; }
+.float-2 { animation: float2 7s ease-in-out infinite; }
+.float-3 { animation: float3 8s ease-in-out infinite; }
+
+/* ── Spotlight effect ── */
+.spotlight {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: opacity 0.3s;
+}
+
+/* ── Footer links (Server Component: use CSS hover, not JS handlers) ── */
+.footer-link {
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.35s ease, text-shadow 0.35s ease;
+  text-shadow: 0 0 6px rgb(var(--neon-cyan) / 0.15), 0 0 12px rgb(var(--neon-violet) / 0.08);
+}
+.footer-link:hover {
+  color: #f8f8ff;
+  text-shadow: var(--neon-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-shadow: 0 0 2px rgb(var(--neon-cyan) / 0.25), 0 0 8px rgb(var(--neon-violet) / 0.12);
+  }
+  .neon-clip-text,
+  .gradient-text {
+    filter: drop-shadow(0 0 4px rgb(var(--neon-cyan) / 0.25));
+  }
+  .hero-phrase-pulse {
+    animation: gradientShift 5s linear infinite;
+    filter: drop-shadow(0 0 8px rgb(var(--neon-cyan) / 0.35)) drop-shadow(0 0 16px rgb(var(--neon-violet) / 0.2));
+  }
+}
